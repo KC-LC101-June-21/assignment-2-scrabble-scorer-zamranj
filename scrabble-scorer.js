@@ -62,10 +62,7 @@ let simpleScore = function (word){
     }
   word = word.toLowerCase();
 	return `${letterPoints} Score for '${word}': ${totalScore}`;//debug statement
-
 } 
-
-
 let vowelBonusScore = function(word){
   word = word.toUpperCase();
 	let letterPoints = "";
@@ -75,15 +72,27 @@ let vowelBonusScore = function(word){
       if(vowelPointStructure[pointValue].includes(word[i])){
         letterPoints += `Points for '${word[i]}': ${pointValue}\n`;
         totalScore += Number(pointValue);
-
       }
 	 	}
 	}
  return `${letterPoints} Score for '${word}': ${totalScore}`;
 };
+/*TODO Once you've defined newPointStructure, use it to finish writing the scrabbleScore() function and then replace the oldScrabbleScorer() function in scoringAlgorithms with this new function.
+*/
+let scrabbleScore = function(word){
+  word = word.toLowerCase();
+	let letterPoints = "";
+  let totalScore = 0;
+	  for (const pointValue in newPointStructure) {
+      
 
-let scrabbleScore = function(){
-
+      // if(newPointStructure[pointValue].includes(word[i])){
+      //   letterPoints += `Points for '${word[i]}': ${pointValue}\n`;
+      //   totalScore += Number(pointValue);
+    }
+	 	
+	}
+ return `${letterPoints} Score for '${word}': ${totalScore}`;
 };
 
 const scoringAlgorithms = [
@@ -202,7 +211,7 @@ function transform(obj) {
      return out;
 };
 
-let newPointStructure = transform(oldPointStructure);
+let newPointStructure = transform(obj);
 
 function runProgram() {
   let word = initialPrompt();
@@ -214,14 +223,16 @@ function runProgram() {
   // }else{
   //   console.log(scoringAlgorithms[2].scoringFunction(word));
   // }
+
   // console.log("Scrabble scoring values for");
   // console.log("Letter a: ", newPointStructure.a);
   // console.log("Letter j: ", newPointStructure.j);
   // console.log("Letter z: ", newPointStructure["z"]);
+
   // console.log(simpleScore(word));
   // console.log(vowelBonusScore(word));
-  // console.log(oldScrabbleScorer(word));
-
+  console.log(scrabbleScore(word));
+  // console.log(newPointStructure)
 
 
     
