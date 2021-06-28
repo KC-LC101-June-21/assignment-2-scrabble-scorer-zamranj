@@ -51,17 +51,17 @@ function initialPrompt() {
 };
 
 let simpleScore = function (word){
-      word = word.toUpperCase();
-      let letterPoints = "";
-      let totalScore = 0;
-      for (let i = 0; i < word.length; i++) {
-        for (const pointValue in simplePointStructure) {
-          letterPoints += `Points for '${word[i]}': ${pointValue}`;
-          totalScore += Number(pointValue);
-        }
+   word = word.toUpperCase();
+  let letterPoints = "";
+  let totalScore = 0;
+  for (let i = 0; i < word.length; i++) {
+     for (const pointValue in simplePointStructure) {
+      letterPoints += `Points for '${word[i]}': ${pointValue}\n`;
+      totalScore += Number(pointValue);
       }
-    word = word.toLowerCase();
-	  return `${letterPoints} Score for '${word}': ${totalScore}`;//debug statement
+    }
+  word = word.toLowerCase();
+	return `${letterPoints} Score for '${word}': ${totalScore}`;//debug statement
 
 } 
 
@@ -69,16 +69,17 @@ let simpleScore = function (word){
 let vowelBonusScore = function(word){
   word = word.toUpperCase();
 	let letterPoints = "";
- 
+  let totalScore = 0;
 	for (let i = 0; i < word.length; i++) {
- 
 	  for (const pointValue in vowelPointStructure) {
-    if(vowelPointStructure[pointValue].includes(word[i])){
-      letterPoints += `Points for '${word[i]}': ${pointValue}\n`
-        }
-		 	}
-	  }
-	return letterPoints;
+      if(vowelPointStructure[pointValue].includes(word[i])){
+        letterPoints += `Points for '${word[i]}': ${pointValue}\n`;
+        totalScore += Number(pointValue);
+
+      }
+	 	}
+	}
+ return `${letterPoints} Score for '${word}': ${totalScore}`;
 };
 
 let scrabbleScore = function(){
@@ -102,7 +103,7 @@ const scoringAlgorithms = [
     word = word.toLowerCase();
 	  return `${letterPoints} Score for '${word}': ${totalScore}`;//debug statement
 
-      }
+    }
   },
   {name:"Bonus Vowels",
   description:"Vowels are 3 pts, consonants are 1 pt.",
@@ -205,18 +206,22 @@ let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
   let word = initialPrompt();
-  let option = scorerPrompt();
-  if(option === "0"){
-    console.log(scoringAlgorithms[0].scoringFunction(word));
-  }else if(option === "1"){
-    console.log(scoringAlgorithms[1].scoringFunction(word));
-  }else{
-    console.log(scoringAlgorithms[2].scoringFunction(word));
-  }
-  console.log("Scrabble scoring values for");
-  console.log("Letter a: ", newPointStructure.a);
-  console.log("Letter j: ", newPointStructure.j);
-  console.log("Letter z: ", newPointStructure["z"]);
+  // let option = scorerPrompt();
+  // if(option === "0"){
+  //   console.log(scoringAlgorithms[0].scoringFunction(word));
+  // }else if(option === "1"){
+  //   console.log(scoringAlgorithms[1].scoringFunction(word));
+  // }else{
+  //   console.log(scoringAlgorithms[2].scoringFunction(word));
+  // }
+  // console.log("Scrabble scoring values for");
+  // console.log("Letter a: ", newPointStructure.a);
+  // console.log("Letter j: ", newPointStructure.j);
+  // console.log("Letter z: ", newPointStructure["z"]);
+  // console.log(simpleScore(word));
+  // console.log(vowelBonusScore(word));
+  // console.log(oldScrabbleScorer(word));
+
 
 
     
