@@ -50,20 +50,21 @@ function initialPrompt() {
    return word;
 };
 
-let simpleScore; 
-//= function (word){
-// word = word.toUpperCase();
-// 	let letterPoints = "";
- 
-// 	for (let i = 0; i < word.length; i++) {
- 
-// 	  for (const pointValue in simplePointStructure) {
- 
-// 		 	letterPoints += `Points for '${word[i]}': ${pointValue}\n`
-// 		 }
-// 	}
-// 	return letterPoints;
-//  };
+let simpleScore = function (word){
+      word = word.toUpperCase();
+      let letterPoints = "";
+      let totalScore = 0;
+      for (let i = 0; i < word.length; i++) {
+        for (const pointValue in simplePointStructure) {
+          letterPoints += `Points for '${word[i]}': ${pointValue}`;
+          totalScore += Number(pointValue);
+        }
+      }
+    word = word.toLowerCase();
+	  return `${letterPoints} Score for '${word}': ${totalScore}`;//debug statement
+
+} 
+
 
 let vowelBonusScore = function(word){
   word = word.toUpperCase();
@@ -91,22 +92,55 @@ const scoringAlgorithms = [
       word = word.toUpperCase();
       let letterPoints = "";
       let totalScore = 0;
-    
       for (let i = 0; i < word.length; i++) {
-    
         for (const pointValue in simplePointStructure) {
-    
           letterPoints += `Points for '${word[i]}': ${pointValue}`;
+          letterPoints = letterPoints+"+"+pointValue;//debug statement
           totalScore += Number(pointValue);
         }
       }
-      word = word.toLowerCase();
-      return `Score for '${word}': ${totalScore}`;
+    word = word.toLowerCase();
+	  return `${letterPoints} Score for '${word}': ${totalScore}`;//debug statement
+
       }
   },
-  {"Name":"Bonus Vowels","Description":"Vowels are 3 pts, consonants are 1 pt.",scoringFunction:function (word){}},
-  {"Name":"Scrabble","Description":"The traditional scoring algorithm.",scoringFunction:function (word){}}
-  ];
+  {name:"Bonus Vowels",
+  description:"Vowels are 3 pts, consonants are 1 pt.",
+  scoringFunction : function (word){
+      word = word.toUpperCase();
+      let letterPoints = "";
+      let totalScore = 0;
+      for (let i = 0; i < word.length; i++) {
+        for (const pointValue in vowelPointStructure) {
+          if(vowelPointStructure[pointValue].includes(word[i])){
+          letterPoints = letterPoints+"+"+pointValue;//debug statement
+          totalScore += Number(pointValue);
+            }
+          }
+        }
+    word = word.toLowerCase();
+	  return `${letterPoints} Score for '${word}': ${totalScore}`;
+    } 
+  },
+  {name:"Scrabble",
+  description:"The traditional scoring algorithm.",
+  scoringFunction:function (word){
+    word = word.toUpperCase();
+      let letterPoints = "";
+      let totalScore = 0;
+      for (let i = 0; i < word.length; i++) {
+        for (const pointValue in oldPointStructure) {
+          if(oldPointStructure[pointValue].includes(word[i])){
+          letterPoints = letterPoints+"+"+pointValue;//debug statement
+          totalScore += Number(pointValue);
+            }
+          }
+        }
+    word = word.toLowerCase();
+	  return `${letterPoints} Score for '${word}': ${totalScore}`;
+    }
+  }
+];
 
 function scorerPrompt() {
   option = input.question(`Which scoring algorithm would like to use?\n
@@ -118,52 +152,53 @@ function scorerPrompt() {
 }
 
 function transform(obj) {
-    let store = [];
+  let store =[];
+  let out ={};
      for (let key in obj) {
         for(let i=0; i<obj[key].length; i++){
             store.push(obj[key][i].toLowerCase());
           }
         }
-    store.forEach(key => newPointStructure[key]= 1);
-    for (const key of Object.keys(newPointStructure)){
+    store.forEach(key => out[key]= 1);
+    for (const key of Object.keys(out)){
       if(key === "q"){
-        newPointStructure[key] = 10;
+        out[key] = 10;
       }if(key === "z"){
-        newPointStructure[key] = 10;
+        out[key] = 10;
       }if(key === "j"){
-        newPointStructure[key] = 8;
+        out[key] = 8;
       }if(key === "x"){
-        newPointStructure[key] = 8;
+        out[key] = 8;
       }if(key === "k"){
-        newPointStructure[key] = 5;
+        out[key] = 5;
       }if(key === "f"){
-        newPointStructure[key] = 4;
+        out[key] = 4;
       }if(key === "h"){
-        newPointStructure[key] = 4;
+        out[key] = 4;
       }if(key === "v"){
-        newPointStructure[key] = 4;
+        out[key] = 4;
       }if(key === "w"){
-        newPointStructure[key] = 4;
+        out[key] = 4;
       }if(key === "y"){
-        newPointStructure[key] = 4;
+        out[key] = 4;
       }if(key === "b"){
-        newPointStructure[key] = 3;
+        out[key] = 3;
       }if(key === "c"){
-        newPointStructure[key] = 3;
+        out[key] = 3;
       }if(key === "m"){
-        newPointStructure[key] = 3;
+        out[key] = 3;
       }if(key === "p"){
-        newPointStructure[key] = 3;
+        out[key] = 3;
       }if(key === "d"){
-        newPointStructure[key] = 2;
+        out[key] = 2;
       }if(key === "g"){
-        newPointStructure[key] = 2;
+        out[key] = 2;
       }
     }
+     return out;
 };
 
-let newPointStructure = {};
-transform(oldPointStructure);
+let newPointStructure = transform(oldPointStructure);
 
 function runProgram() {
   let word = initialPrompt();
@@ -171,16 +206,14 @@ function runProgram() {
   if(option === "0"){
     console.log(scoringAlgorithms[0].scoringFunction(word));
   }else if(option === "1"){
-    console.log("it is going here");
-    scoringAlgorithms[1].scoringFunction(word);
+    console.log(scoringAlgorithms[1].scoringFunction(word));
   }else{
-    console.log("it is failing");
-    scoringAlgorithms[2].scoringFunction(word);
+    console.log(scoringAlgorithms[2].scoringFunction(word));
   }
-  // console.log("Scrabble scoring values for");
-  // console.log("Letter a: ", newPointStructure.a);
-  // console.log("Letter j: ", newPointStructure.j);
-  // console.log("Letter z: ", newPointStructure["z"]);
+  console.log("Scrabble scoring values for");
+  console.log("Letter a: ", newPointStructure.a);
+  console.log("Letter j: ", newPointStructure.j);
+  console.log("Letter z: ", newPointStructure["z"]);
 
 
     
