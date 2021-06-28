@@ -42,7 +42,7 @@ function oldScrabbleScorer(word) {
 function initialPrompt() {
    word = input.question("Let's play some scrabble! Enter a word: ");
     isString = Number(word)
-  
+ //check for non string values 
  while(isString){
     word = input.question("Let's play some scrabble! Enter a word: ");
     isString = Number(word);
@@ -154,12 +154,15 @@ function scorerPrompt() {
 function transform(obj) {
   let store =[];
   let out ={};
+  //iterate over the object and arrays and push the values into store array
      for (let key in obj) {
         for(let i=0; i<obj[key].length; i++){
             store.push(obj[key][i].toLowerCase());
           }
         }
+    //stores the objects in out and assigns a value of one to every key    
     store.forEach(key => out[key]= 1);
+    //loop over the objects and assign appropriate points to alphabets
     for (const key of Object.keys(out)){
       if(key === "q"){
         out[key] = 10;
