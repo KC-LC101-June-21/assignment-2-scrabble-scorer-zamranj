@@ -10,7 +10,7 @@ const oldPointStructure = {
   5: ['K'],
   8: ['J', 'X'],
   10: ['Q', 'Z'],
-  0: [' ']
+  
   
 };
 const simplePointStructure = {
@@ -201,9 +201,6 @@ function transform(obj) {
         out[key] = 2;
       }if(key === "g"){
         out[key] = 2;
-      }if(key === " "){
-        out[key] = 0;
-      }
     }
      return out;
 };
