@@ -90,8 +90,8 @@ let scrabbleScore = function(word){
 };
 
 const scoringAlgorithms = [
-   {name:"Simple Score",
-    description:"Each letter is worth 1 point.",
+   {name: 'Simple Score',
+    description:'Each letter is worth 1 point.',
     scoringFunction : function (word){
       word = word.toUpperCase();
       let letterPoints = "";
@@ -103,13 +103,13 @@ const scoringAlgorithms = [
           totalScore += Number(pointValue);
         }
       }
-    word = word.toLowerCase();
+    // word = word.toLowerCase();
 	  return `Score for '${word}': ${totalScore}`;
 
     }
   },
-  {name:"Bonus Vowels",
-  description:"Vowels are 3 pts, consonants are 1 pt.",
+  {name:'Bonus Vowels',
+  description:'Vowels are 3 pts, consonants are 1 pt.',
   scoringFunction : function (word){
       word = word.toUpperCase();
       let letterPoints = "";
@@ -122,12 +122,12 @@ const scoringAlgorithms = [
             }
           }
         }
-    word = word.toLowerCase();
-	  return `Score for '${word}': ${totalScore}`;
+    // word = word.toLowerCase();
+	  return "Score for "+word+" : "+Number(totalScore);
     } 
   },
-  {name:"Scrabble",
-  description:"The traditional scoring algorithm.",
+  {name:'Scrabble',
+  description:'The traditional scoring algorithm.',
   scoringFunction:function (word){
       word = word.toLowerCase();
       let letterPoints = "";
