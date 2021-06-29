@@ -9,9 +9,7 @@ const oldPointStructure = {
   4: ['F', 'H', 'V', 'W', 'Y'],
   5: ['K'],
   8: ['J', 'X'],
-  10: ['Q', 'Z'],
-  
-  
+  10: ['Q', 'Z']
 };
 const simplePointStructure = {
   1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T','D','G','B', 'C','M', 'P','F', 'H', 'V', 'W', 'Y','K','J', 'X','Q', 'Z']
@@ -201,6 +199,7 @@ function transform(obj) {
         out[key] = 2;
       }if(key === "g"){
         out[key] = 2;
+      }
     }
      return out;
 };
@@ -233,3 +232,4 @@ module.exports = {
 	runProgram: runProgram,
 	scorerPrompt: scorerPrompt
 };
+
