@@ -57,7 +57,7 @@ let simpleScore = function (word){
       }
     }
   word = word.toLowerCase();
-	return `${letterPoints} Score for '${word}': ${totalScore}`;//debug statment
+	return `Score for '${word}': ${totalScore}`;
 } 
 let vowelBonusScore = function(word){
   word = word.toUpperCase();
@@ -81,7 +81,6 @@ let scrabbleScore = function(word){
 	 	for (let i = 0; i < word.length; i++) {
 	    for (const key in newPointStructure) {
        if(key === word[i]){
-         letterPoints = letterPoints+"+"+newPointStructure[key];//debug stateent
          totalScore += Number(newPointStructure[key]);
       }
 	 	}
@@ -99,7 +98,6 @@ const scoringAlgorithms = [
       for (let i = 0; i < word.length; i++) {
         for (const pointValue in simplePointStructure) {
           letterPoints += `Points for '${word[i]}': ${pointValue}`;
-          letterPoints = letterPoints+"+"+pointValue;//debug statment
           totalScore += Number(pointValue);
         }
       }
@@ -117,7 +115,6 @@ const scoringAlgorithms = [
       for (let i = 0; i < word.length; i++) {
         for (const pointValue in vowelPointStructure) {
           if(vowelPointStructure[pointValue].includes(word[i])){
-          letterPoints = letterPoints+"+"+pointValue;//debug statment
           totalScore += Number(pointValue);
             }
           }
@@ -135,7 +132,6 @@ const scoringAlgorithms = [
         for (let i = 0; i < word.length; i++) {
           for (const key in newPointStructure) {
           if(key === word[i]){
-            letterPoints = letterPoints+"+"+newPointStructure[key];//debug statment
             totalScore += Number(newPointStructure[key]);
           }
         }
