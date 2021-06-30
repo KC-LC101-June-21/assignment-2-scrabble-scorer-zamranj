@@ -102,7 +102,8 @@ const scoringAlgorithms = [
         }
       }
     // word = word.toLowerCase();
-	  return `Points for '${word}': ${totalScore}`;
+	  console.log("Points for "+word+" : "+Number(totalScore));
+     return totalScore;
 
     }
   },
@@ -120,7 +121,8 @@ const scoringAlgorithms = [
           }
         }
     console.log(typeof totalScore);
-	  return "Points for "+word+" : "+Number(totalScore);
+	   console.log("Points for "+word+" : "+Number(totalScore));
+     return totalScore;
     } 
   },
   {name:'Scrabble',
@@ -136,7 +138,8 @@ const scoringAlgorithms = [
           }
         }
       }
-    return `Points for '${word}': ${totalScore}`;
+    console.log("Points for "+word+" : "+Number(totalScore));
+     return totalScore;
     }
   }
 ];
@@ -206,11 +209,11 @@ function runProgram() {
   let word = initialPrompt();
   let option = scorerPrompt();
   if(option === "0"){
-    console.log(scoringAlgorithms[0].scoringFunction(word));
+    scoringAlgorithms[0].scoringFunction(word);
   }else if(option === "1"){
-    console.log(scoringAlgorithms[1].scoringFunction(word));
+    scoringAlgorithms[1].scoringFunction(word);
   }else{
-    console.log(scoringAlgorithms[2].scoringFunction(word));
+    scoringAlgorithms[2].scoringFunction(word);
   }
 }
 
