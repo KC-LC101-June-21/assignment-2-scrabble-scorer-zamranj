@@ -37,7 +37,7 @@ function oldScrabbleScorer(word) {
 let newPointStructure = transform(oldPointStructure);
 function initialPrompt() {
    word = input.question("Let's play some scrabble! Enter a word: ");
-    isString = Number(word)
+  isString = Number(word)
  //check for non string values 
  while(isString){
     word = input.question("Let's play some scrabble! Enter a word: ");
@@ -57,7 +57,7 @@ let simpleScore = function (word){
       }
     }
   word = word.toLowerCase();
-	return `Score for '${word}': ${totalScore}`;
+	return `Points for '${word}': ${totalScore}`;
 } 
 let vowelBonusScore = function(word){
   word = word.toUpperCase();
@@ -71,7 +71,7 @@ let vowelBonusScore = function(word){
       }
 	 	}
 	}
- return `${letterPoints} Score for '${word}': ${totalScore}`;
+ return `${letterPoints} Points for '${word}': ${totalScore}`;
 };
 
 let scrabbleScore = function(word){
@@ -85,7 +85,7 @@ let scrabbleScore = function(word){
       }
 	 	}
 	}
- return `Score for '${word}': ${totalScore}`;
+ return `Points for '${word}': ${totalScore}`;
 };
 
 const scoringAlgorithms = [
@@ -102,7 +102,7 @@ const scoringAlgorithms = [
         }
       }
     // word = word.toLowerCase();
-	  return `Score for '${word}': ${totalScore}`;
+	  return `Points for '${word}': ${totalScore}`;
 
     }
   },
@@ -119,8 +119,8 @@ const scoringAlgorithms = [
             }
           }
         }
-    // word = word.toLowerCase();
-	  return "Score for "+word+" : "+Number(totalScore);
+    console.log(typeof totalScore);
+	  return "Points for "+word+" : "+Number(totalScore);
     } 
   },
   {name:'Scrabble',
@@ -136,7 +136,7 @@ const scoringAlgorithms = [
           }
         }
       }
-    return `Score for '${word}': ${totalScore}`;
+    return `Points for '${word}': ${totalScore}`;
     }
   }
 ];
