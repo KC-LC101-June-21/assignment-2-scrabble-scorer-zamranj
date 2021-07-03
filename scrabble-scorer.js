@@ -10,7 +10,7 @@ const oldPointStructure = {
   5: ['K'],
   8: ['J', 'X'],
   10: ['Q', 'Z']
-  };
+};
 const simplePointStructure = {
   1: ['A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T','D','G','B', 'C','M', 'P','F', 'H', 'V', 'W', 'Y','K','J', 'X','Q', 'Z']
 };
@@ -38,7 +38,7 @@ let newPointStructure = transform(oldPointStructure);
 function initialPrompt() {
    word = input.question("Let's play some scrabble! Enter a word: ");
   isString = Number(word)
- //Bonus check for non string values 
+ //check for non string values 
  while(isString){
     word = input.question("Let's play some scrabble! Enter a word: ");
     isString = Number(word);
@@ -70,6 +70,7 @@ let vowelBonusScore = function(word){
             }
           }
         }
+    console.log(typeof totalScore);
 	   console.log("Points for "+word+" : "+Number(totalScore));
      return totalScore;
     
@@ -82,7 +83,6 @@ word = word.toLowerCase();
         for (let i = 0; i < word.length; i++) {
           for (const key in newPointStructure) {
           if(key === word[i]){
-            letterPoints = letterPoints +"+"+ newPointStructure[key];
             totalScore += Number(newPointStructure[key]);
           }
         }
@@ -162,8 +162,6 @@ function transform(obj) {
         out[key] = 2;
       }
     }
-    // Bonus: Score words spelled with blank tiles by adding ' ' to the newPointStructure object. The point value for a blank tile is 0
-    out[" "] = 0;
      return out;
 };
 
@@ -180,6 +178,7 @@ function runProgram() {
     scoringAlgorithms[2].scoringFunction(word);
   }
 }
+
 // Don't write any code below this line //
 // And don't change these or your program will not run as expected //
 module.exports = {
